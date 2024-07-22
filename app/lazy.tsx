@@ -2,12 +2,12 @@
 
 import { useEffect, useState, cloneElement } from "react";
 
-export default function LazyGreet({children, name}: {children: React.ReactNode, name: string}) {
+export default function Lazy<P>({children, component: Component, ...props}: P & {children: React.ReactNode, component: (props: P) => Promise<React.ReactElement>}) {
   const [payload, setPayload] = useState<React.ReactElement>()
 
   useEffect(() => {
     // Get the RSC payload from a route handler
-    fetch(`/defer?name=${name}`).then(res => res.json()).then(setPayload)
+    Component(props as P).then(setPayload)
   }, [])
 
   if (!payload) return children
