@@ -1,12 +1,12 @@
-import Lazy from "./lazy";
+import LazyGreet from "./lazy-greet";
 
 export default function Home() {
   return (
     <main>
       <h1>Next.js server islands</h1>
-      <Lazy name="Something else">
+      <LazyGreet name="Something else">
         Loading...
-      </Lazy>
+      </LazyGreet>
     </main>
   );
 }
