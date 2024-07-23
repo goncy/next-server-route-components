@@ -1,12 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: false, // Prevent effects running twice in development
   experimental: {
-    ppr: true
+    ppr: true // To get React latest version
   },
-  typescript: {
-    ignoreBuildErrors: true // Returning a Promise as JSX
-  }
 };
 
 export default nextConfig;
