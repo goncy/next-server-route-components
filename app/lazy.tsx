@@ -18,7 +18,7 @@ export default function Lazy<P>({as: getPayload, ...props}: P & {as: (props: P) 
     })
   }, [])
 
-  if (typeof window === "undefined" || isLoading) postpone("Omit SSR")
+  if (typeof window === "undefined" || isLoading) postpone("Suspend while pre-rendering and fetching")
   
   return payload
 }
