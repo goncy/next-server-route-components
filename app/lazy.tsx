@@ -8,13 +8,13 @@ import { unstable_postpone as postpone, useEffect, useState, useTransition } fro
  * We still fetch only once but we get the suspense behavior we want by using postpone during pre-rendering and a transition during client side fetching.
  */
 
-export default function Lazy<P>({as: getPayload, ...props}: P & {as: (props: P) => Promise<React.ReactElement>}) {
+export default function Lazy<Props>({as: getPayload, ...props}: Props & {as: (props: Props) => Promise<React.ReactElement>}) {
   const [payload, setPayload] = useState<React.ReactElement>(null)
   const [isLoading, startTransition] = useTransition()
 
   useEffect(() => {
     startTransition(async () => {
-      setPayload(await getPayload(props as P))
+      setPayload(await getPayload(props as Props))
     })
   }, [])
 
