@@ -1,16 +1,9 @@
 'use client'
 
-import { useEffect, useState, cloneElement } from "react";
+import { use, unstable_postpone as postpone } from "react";
 
-export default function Lazy<P>({children = null, component: Component, ...props}: P & {children?: React.ReactElement, component: (props: P) => Promise<React.ReactElement>}) {
-  const [payload, setPayload] = useState<React.ReactElement>()
-
-  useEffect(() => {
-    // Get the RSC payload from a route handler
-    Component(props as P).then(setPayload)
-  }, [])
-
-  if (!payload) return children
-
-  return cloneElement(payload)
+export default function Lazy<P>({as: Component, ...props}: P & {as: (props: P) => Promise<React.ReactElement>}) {
+  if (typeof window === "undefined") postpone("Omit SSR")
+  
+  return use(Component(props as P))
 }

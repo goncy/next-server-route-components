@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Greet } from "./greet";
 import Lazy from "./lazy";
 
@@ -5,9 +6,9 @@ export default function Home({searchParams}: {searchParams: Record<string, strin
   return (
     <main>
       <h1>Next.js server islands</h1>
-      <Lazy component={Greet} name={searchParams.greet || "Something else"}>
-        <p>Loading...</p>
-      </Lazy>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Lazy as={Greet} name={searchParams.greet || "Something else"} />
+      </Suspense>
     </main>
   );
 }
