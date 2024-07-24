@@ -22,6 +22,31 @@ export default function Lazy<Props>({as: getPayload, ...props}: Props & {as: (pr
   
   return payload
 }
+/**
+ * You could even refresh the data every N seconds by adding a `setInterval` inside the `useEffect` callback.
+ * 
+ * ```jsx
+ *  useEffect(() => {
+ *    let interval: NodeJS.Timeout;
+ * 
+ *    async function fetchPayload() {
+ *      setPayload(await getPayload(props as Props))
+ *    }
+ *    
+ *    if (reloadEvery > 0) {
+ *      interval = setInterval(fetchPayload, reloadEvery)
+ *    }
+ *    
+ *    startTransition(async () => {
+ *      fetchPayload()
+ *    })
+ * 
+ *    return () => {
+ *      clearInterval(interval)
+ *    }
+ *  }, [])
+ * ```
+ */
 
 /**
  * ## Previous iterations of this idea:
