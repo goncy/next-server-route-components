@@ -22,6 +22,7 @@ export default function Lazy<Props>({as: getPayload, ...props}: Props & {as: (pr
   
   return payload
 }
+
 /**
  * You could even refresh the data every N seconds by adding a `setInterval` inside the `useEffect` callback.
  * 

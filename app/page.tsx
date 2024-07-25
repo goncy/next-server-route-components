@@ -1,3 +1,5 @@
+"use client"
+
 import { Suspense } from "react";
 import { Greet } from "./greet";
 import Lazy from "./lazy";
